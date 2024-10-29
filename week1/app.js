@@ -20,3 +20,13 @@ app.get('/books', (_, res) => {
             res.status(500).json({ error: `could not fetch the documents ${err}` });
         });
 });
+
+app.get('/books/:id', (_, res)=>{
+    db.collection('books').findOne({ _id: id })
+        .then(book => {
+            res.status(200).json(book);
+        })
+        .catch(err => {
+            res.status(500).json({ error: `could not fetch the document ${err}` });
+        });
+})
