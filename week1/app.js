@@ -1,5 +1,6 @@
 const express = require('express');
 const { connectToDb, getDb } = require('./db');
+const { ObjectId } = require('bson');
 
 const app = express();
 let db;
@@ -21,8 +22,12 @@ app.get('/books', (_, res) => {
         });
 });
 
+app.get('/api/user', (_, res) =>{
+    res.status(200).json({ name: 'John Doe', age: 30 });
+})
+
 app.get('/books/:id', (_, res)=>{
-    db.collection('books').findOne({ _id: id })
+    db.collection('books').findOne({ _id: new ObjectId(_.params.id)})
         .then(book => {
             res.status(200).json(book);
         })
