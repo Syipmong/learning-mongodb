@@ -35,3 +35,14 @@ app.get('/books/:id', (_, res)=>{
             res.status(500).json({ error: `could not fetch the document ${err}` });
         });
 })
+
+
+app.get('/api/v1/2024/books', (_, res)=>{
+    db.collection('books').find({ year: 2024 }).toArray()
+        .then(books => {
+            res.status(200).json(books);
+        })
+        .catch(err => {
+            res.status(500).json({ error: `could not fetch the documents ${err}` });
+        });
+})
