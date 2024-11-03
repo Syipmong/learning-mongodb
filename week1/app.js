@@ -38,11 +38,22 @@ app.get('/books/:id', (_, res)=>{
 
 
 app.get('/api/v1/2024/books', (_, res)=>{
-    db.collection('books').find({ year: 2024 }).toArray()
+    db.collection('books').find({ publishedYear: 2019 }).toArray()
         .then(books => {
             res.status(200).json(books);
         })
         .catch(err => {
             res.status(500).json({ error: `could not fetch the documents ${err}` });
         });
+})
+
+// lets create a beautiful form to get and send data to our server
+app.get('/form', (_, res)=>{
+    res.send(`
+        <form action="/submit-form" method="post">
+            <input type="text" name="name" placeholder="Enter your name" />
+            <input type="text" name="age" placeholder="Enter your age" />
+            <button type="submit">Submit</button>
+        </form>
+    `)
 })

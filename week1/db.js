@@ -1,6 +1,5 @@
 const { MongoClient } = require('mongodb')
 
-
 let dbConnection
 module.exports = {
     connectToDb: ( cb ) => {
@@ -19,5 +18,4 @@ module.exports = {
     },
     getDb: ()=>
         dbConnection
-    
 }
